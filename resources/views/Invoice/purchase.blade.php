@@ -6,6 +6,7 @@ $configData = Helper::appClasses();
 @section('title', 'Purchase')
 
 @section('vendor-style')
+
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/tagify/tagify.css')}}" />
@@ -35,6 +36,10 @@ $configData = Helper::appClasses();
 <script src="{{asset('assets/js/forms-selects.js')}}"></script>
 <script src="{{asset('assets/js/forms-tagify.js')}}"></script>
 <script src="{{asset('assets/js/forms-typeahead.js')}}"></script>
+
+
+<script src="{{asset('assets/js/invoice/purchase.js')}}"></script>
+
 @endsection
 
 @section('content')
@@ -188,41 +193,71 @@ $configData = Helper::appClasses();
         <hr class="my-3 mx-n4" />
 
         <div class="row p-0 p-sm-4">
-          <div class="col-md-6 mb-md-0 mb-3">
+          <div class="col-md-8 mb-md-0 mb-3">
             <div class="row p-0 p-sm-4">
-            <div class="col-md-6 mb-4">
-              <label for="selectpickerBasic" class="form-label">Labour Category</label>
-              <select id="selectpickerBasic" class="selectpicker w-100" data-style="btn-default">
-                <option>Self</option>
-                <option>Client</option>
-              </select>
+                <div class="col-md-4 mb-4">
+                    <label for="labourcategory" class="form-label">Labour Category</label>
+                    <select id="labourcategory" class="selectpicker w-100" data-style="btn-default">
+                        <option>Self</option>
+                        <option>Client</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 mb-4" id="client_labour_block" style="display: none">
+                    <label for="client_labour_amount" class="form-label">Client Labour Amount</label>
+                    <input class="form-control" placeholder="Enter  Amount Give to Client labour..." type="text" value="" tabindex="0" id="client_labour_amount">
+                </div>
+                <div class="col-md-4 mb-4" id="labourAccountSelectBox" style="display: block">
+                    <label for="selectpickerLabourAccount" class="form-label">Labour Account</label>
+                    <select id="selectpickerLabourAccount" class="selectpicker w-100" data-style="btn-default">
+                        <option>Mansha</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 mb-4" id="labour_block" style="display: block">
+                    <label for="labour_amount" class="form-label">Labour Amount</label>
+                    <input class="form-control" placeholder="Enter  Amount Give to  labour..." type="text" value="" tabindex="0" id="labour_amount">
+                    
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label for="logistics" class="form-label">Logistics</label>
+                    <select id="logistics" class="selectpicker w-100" data-style="btn-default">
+                        <option>Self</option>
+                        <option>Client</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 mb-4" id="client_labour_block" style="display: none">
+                    <label for="client_logistics" class="form-label">Client Logistics Rent</label>
+                    <input class="form-control" placeholder="Enter Amount Logistics Rent" type="text" value="" tabindex="0" id="client_logistics">
+                </div>
+                <div class="col-md-4 mb-4" id="labourAccountSelectBox" style="display: block">
+                    <label for="selectpickerLabourAccount" class="form-label">Labour Account</label>
+                    <select id="selectpickerLabourAccount" class="selectpicker w-100" data-style="btn-default">
+                        <option>Mansha</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 mb-4" id="labour_block" style="display: block">
+                    <label for="labour_amount" class="form-label">Labour Amount</label>
+                    <input class="form-control" placeholder="Enter  Amount Give to  labour..." type="text" value="" tabindex="0" id="labour_amount">
+                    
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="selectpickerBasic" class="form-label">Logistics</label>
+                    <select id="selectpickerBasic" class="selectpicker w-100" data-style="btn-default">
+                        <option>Self</option>
+                        <option>Client</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-4" hidden>
+                    <label for="selectpickerBasic" class="form-label">Vehicles Details</label>
+                    <select id="selectpickerBasic" class="selectpicker w-100" data-style="btn-default">
+                        <option>Le 1253</option>
+                        <option>Ok 1258</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-md-6 mb-4">
-              <label for="selectpickerBasic" class="form-label">Labour Account</label>
-              <select id="selectpickerBasic" class="selectpicker w-100" data-style="btn-default">
-                <option>Mansha</option>
-                <option>Other</option>
-              </select>
-              
-            </div>
-            <div class="col-md-6 mb-4">
-              <label for="selectpickerBasic" class="form-label">Logistics</label>
-              <select id="selectpickerBasic" class="selectpicker w-100" data-style="btn-default">
-                <option>Self</option>
-                <option>Client</option>
-              </select>
-            </div>
-            <div class="col-md-6 mb-4">
-              <label for="selectpickerBasic" class="form-label">Vehicles Details</label>
-              <select id="selectpickerBasic" class="selectpicker w-100" data-style="btn-default">
-                <option>Le 1253</option>
-                <option>Ok 1258</option>
-              </select>
-            </div>
-            </div>
-
           </div>
-          <div class="col-md-6 d-flex justify-content-end">
+          <div class="col-md-4 d-flex justify-content-end">
             <div class="invoice-calculations">
               <div class="d-flex justify-content-between mb-2">
                 <span class="w-px-100">Subtotal:</span>
@@ -308,7 +343,37 @@ $configData = Helper::appClasses();
   <!-- /Invoice Actions -->
 </div>
 
+@endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
 <!-- Offcanvas -->
 @include('_partials/_offcanvas/offcanvas-send-invoice')
 <!-- /Offcanvas -->
-@endsection
+<script>
+    $(document).ready(function() {
+    // Attach change event handler to the Labour Category select box
+    
+    $('#labourcategory').change(function() {
+        // Get the selected value
+        var labourAccountSelect = document.getElementById('labourAccountSelectBox');
+        var selectedValue = $(this).val();
+        if (selectedValue === 'Self') {
+            console.log(selectedValue);
+            $("#labourAccountSelectBox").css("display", "block");
+            $("#labour_block").css("display", "block");
+            $("#client_labour_block").css("display", "none");
+            
+        } else {
+            $("#labourAccountSelectBox").css("display", "none");
+            $("#labour_block").css("display", "none");
+            $("#client_labour_block").css("display", "block");
+            
+        }
+
+    });
+
+    // Trigger the change event on page load to handle initial state
+    $('#selectpickerBasic').change();
+});
+
+</script>

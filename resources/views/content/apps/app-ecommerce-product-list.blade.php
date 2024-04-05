@@ -111,6 +111,8 @@
         </tr>
       </thead>
     </table>
+    <div class="col-sm-12 col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">{{ $customers->links() }}</div></div>
+    
   </div>
 </div>
 
